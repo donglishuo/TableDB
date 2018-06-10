@@ -5,7 +5,7 @@ Date: 2017.04.12
 Desc:
 
 ------------------------------------------------------------
-NPL.load("(gl)npl_mod/TableDB/SQLHandler.lua");
+NPL.load("./TableDB/SQLHandler.lua");
 local SQLHandler = commonlib.gettable("TableDB.SQLHandler");
 ------------------------------------------------------------
 ]]
@@ -14,19 +14,15 @@ local SQLHandler = commonlib.gettable("TableDB.SQLHandler");
 NPL.load("(gl)script/ide/commonlib.lua")
 NPL.load("(gl)script/ide/System/Compiler/lib/util.lua")
 local util = commonlib.gettable("System.Compiler.lib.util")
-NPL.load("(gl)npl_mod/Raft/Rpc.lua")
-local Rpc = commonlib.gettable("Raft.Rpc")
-NPL.load("(gl)npl_mod/TableDB/RaftLogEntryValue.lua")
-local RaftLogEntryValue = commonlib.gettable("TableDB.RaftLogEntryValue")
-NPL.load("(gl)npl_mod/Raft/ServerState.lua")
-local ServerState = commonlib.gettable("Raft.ServerState")
-
 NPL.load("(gl)script/ide/System/Database/TableDatabase.lua")
 local TableDatabase = commonlib.gettable("System.Database.TableDatabase")
 
-local RaftMessageType = NPL.load("(gl)npl_mod/Raft/RaftMessageType.lua")
-local LoggerFactory = NPL.load("(gl)npl_mod/Raft/LoggerFactory.lua")
-local SQLHandler = commonlib.gettable("TableDB.SQLHandler")
+local Rpc = NPL.load("../Raft/Rpc.lua")
+local RaftLogEntryValue = NPL.load("./RaftLogEntryValue.lua")
+local ServerState = NPL.load("../Raft/ServerState.lua")
+local RaftMessageType = NPL.load("../Raft/RaftMessageType.lua")
+local LoggerFactory = NPL.load("../Raft/LoggerFactory.lua")
+local SQLHandler = NPL.export()
 
 local g_threadName = __rts__:GetName()
 
@@ -40,12 +36,10 @@ local logger = LoggerFactory.getLogger("SQLHandler")
 function SQLHandler:new(baseDir, useFile)
   local ServerStateManager
   if useFile then
-    NPL.load("(gl)npl_mod/Raft/FileBasedServerStateManager.lua")
-    local FileBasedServerStateManager = commonlib.gettable("Raft.FileBasedServerStateManager")
+    local FileBasedServerStateManager = NPL.load("../Raft/FileBasedServerStateManager.lua")
     ServerStateManager = FileBasedServerStateManager
   else
-    NPL.load("(gl)npl_mod/Raft/SqliteBasedServerStateManager.lua")
-    local SqliteBasedServerStateManager = commonlib.gettable("Raft.SqliteBasedServerStateManager")
+    local SqliteBasedServerStateManager = NPL.load("../Raft/SqliteBasedServerStateManager.lua")
     ServerStateManager = SqliteBasedServerStateManager
   end
 

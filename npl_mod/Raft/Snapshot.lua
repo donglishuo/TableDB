@@ -11,7 +11,7 @@ local Snapshot = commonlib.gettable("Raft.Snapshot");
 ------------------------------------------------------------
 ]] --
 
-local Snapshot = commonlib.gettable("Raft.Snapshot")
+local Snapshot = NPL.export()
 
 function Snapshot:new(lastLogIndex, lastLogTerm, lastConfig, size, collectionsNameSize)
   local o = {

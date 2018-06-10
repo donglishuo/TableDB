@@ -6,40 +6,32 @@ Desc:
 
 
 ------------------------------------------------------------
-NPL.load("(gl)npl_mod/Raft/RaftServer.lua");
+NPL.load("./RaftServer.lua");
 local RaftServer = commonlib.gettable("Raft.RaftServer");
 ------------------------------------------------------------
 ]]
 --
 NPL.load("(gl)script/ide/commonlib.lua")
-NPL.load("(gl)npl_mod/Raft/RaftMessageSender.lua")
-local RaftMessageSender = commonlib.gettable("Raft.RaftMessageSender")
-NPL.load("(gl)npl_mod/Raft/ClusterServer.lua")
-local ClusterServer = commonlib.gettable("Raft.ClusterServer")
-NPL.load("(gl)npl_mod/Raft/ServerState.lua")
-local ServerState = commonlib.gettable("Raft.ServerState")
-NPL.load("(gl)npl_mod/Raft/LogEntry.lua")
-local LogEntry = commonlib.gettable("Raft.LogEntry")
-local LogValueType = NPL.load("(gl)npl_mod/Raft/LogValueType.lua")
-local ServerRole = NPL.load("(gl)npl_mod/Raft/ServerRole.lua")
-NPL.load("(gl)npl_mod/Raft/PeerServer.lua")
-local PeerServer = commonlib.gettable("Raft.PeerServer")
 NPL.load("(gl)script/ide/timer.lua")
-local RaftMessageType = NPL.load("(gl)npl_mod/Raft/RaftMessageType.lua")
 NPL.load("(gl)script/ide/System/Compiler/lib/util.lua")
 local util = commonlib.gettable("System.Compiler.lib.util")
-NPL.load("(gl)npl_mod/Raft/ClusterConfiguration.lua")
-local ClusterConfiguration = commonlib.gettable("Raft.ClusterConfiguration")
-NPL.load("(gl)npl_mod/Raft/Snapshot.lua")
-local Snapshot = commonlib.gettable("Raft.Snapshot")
-NPL.load("(gl)npl_mod/Raft/SnapshotSyncRequest.lua")
-local SnapshotSyncRequest = commonlib.gettable("Raft.SnapshotSyncRequest")
-NPL.load("(gl)npl_mod/Raft/SnapshotSyncContext.lua")
-local SnapshotSyncContext = commonlib.gettable("Raft.SnapshotSyncContext")
-NPL.load("(gl)npl_mod/Raft/Rutils.lua")
-local Rutils = commonlib.gettable("Raft.Rutils")
 
-local RaftServer = commonlib.gettable("Raft.RaftServer")
+local RaftMessageSender = NPL.load("./RaftMessageSender.lua")
+local ClusterServer = NPL.load("./ClusterServer.lua")
+local ServerState = NPL.load("./ServerState.lua")
+local LogEntry = NPL.load("./LogEntry.lua")
+local LogValueType = NPL.load("./LogValueType.lua")
+local ServerRole = NPL.load("./ServerRole.lua")
+local PeerServer = NPL.load("./PeerServer.lua")
+local RaftMessageType = NPL.load("./RaftMessageType.lua")
+local ClusterConfiguration = NPL.load("./ClusterConfiguration.lua")
+local Snapshot = NPL.load("./Snapshot.lua")
+local SnapshotSyncRequest = NPL.load("./SnapshotSyncRequest.lua")
+local SnapshotSyncContext = NPL.load("./SnapshotSyncContext.lua")
+local Rutils = NPL.load("./Rutils.lua")
+
+local RaftServer = NPL.export()
+
 local WALHandlerFile = "RPC/WALHandler.lua"
 
 local DEFAULT_SNAPSHOT_SYNC_BLOCK_SIZE = 4 * 1024

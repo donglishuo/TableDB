@@ -9,22 +9,23 @@ so the code is a bit ugly :(
 now this bug fix. 2017.05.16
 
 ------------------------------------------------------------
-NPL.load("(gl)npl_mod/Raft/FileBasedSequentialLogStore.lua");
-local FileBasedSequentialLogStore = commonlib.gettable("Raft.FileBasedSequentialLogStore");
+
+local FileBasedSequentialLogStore = NPL.load("./FileBasedSequentialLogStore");
 ------------------------------------------------------------
 ]]
 --
 NPL.load("(gl)script/ide/System/Compiler/lib/util.lua")
+
 local util = commonlib.gettable("System.Compiler.lib.util")
-NPL.load("(gl)npl_mod/Raft/LogEntry.lua")
-local LogEntry = commonlib.gettable("Raft.LogEntry")
-NPL.load("(gl)npl_mod/Raft/LogBuffer.lua")
-local LogBuffer = commonlib.gettable("Raft.LogBuffer")
 
-local LogValueType = NPL.load("(gl)npl_mod/Raft/LogValueType.lua")
-local LoggerFactory = NPL.load("(gl)npl_mod/Raft/LoggerFactory.lua")
+local LogEntry = NPL.load("./LogEntry")
 
-local FileBasedSequentialLogStore = commonlib.gettable("Raft.FileBasedSequentialLogStore")
+local LogBuffer = NPL.load("./LogBuffer")
+
+local LogValueType = NPL.load("./LogValueType.lua")
+local LoggerFactory = NPL.load("./LoggerFactory.lua")
+
+local FileBasedSequentialLogStore = NPL.export();
 
 local LOG_INDEX_FILE = "store.idx"
 local LOG_STORE_FILE = "store.data"

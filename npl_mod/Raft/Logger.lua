@@ -7,11 +7,11 @@ Desc:
 
 ------------------------------------------------------------
 NPL.load("(gl)npl_mod/Raft/Logger.lua");
-local Logger = commonlib.gettable("Raft.Logger");
+local Logger = NPL.export();
 ------------------------------------------------------------
 ]] --
 
-local Logger = commonlib.gettable("Raft.Logger")
+local Logger = NPL.export();
 
 function Logger:new(modname)
   local module_name = modname or ""

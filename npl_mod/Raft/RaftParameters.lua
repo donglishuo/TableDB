@@ -12,7 +12,7 @@ local RaftParameters = commonlib.gettable("Raft.RaftParameters");
 ]] --
 
 local util = commonlib.gettable("System.Compiler.lib.util")
-local RaftParameters = commonlib.gettable("Raft.RaftParameters")
+local RaftParameters = NPL.export()
 
 function RaftParameters:new()
   local o = {

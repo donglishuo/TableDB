@@ -6,20 +6,21 @@ Desc:
   call RaftServer to process msgs
 
 ------------------------------------------------------------
-NPL.load("(gl)npl_mod/Raft/RaftMessageSender.lua");
+NPL.load("./RaftMessageSender.lua");
 local RaftMessageSender = commonlib.gettable("Raft.RaftMessageSender");
 ------------------------------------------------------------
 ]] --
 
-local LoggerFactory = NPL.load("(gl)npl_mod/Raft/LoggerFactory.lua")
-
-local logger = LoggerFactory.getLogger("RaftMessageSender")
 NPL.load("(gl)script/ide/System/Compiler/lib/util.lua")
 local util = commonlib.gettable("System.Compiler.lib.util")
-NPL.load("(gl)npl_mod/Raft/Rpc.lua")
-local Rpc = commonlib.gettable("Raft.Rpc")
-local RaftMessageType = NPL.load("(gl)npl_mod/Raft/RaftMessageType.lua")
-local RaftMessageSender = commonlib.gettable("Raft.RaftMessageSender")
+
+local LoggerFactory = NPL.load("./LoggerFactory.lua")
+local Rpc = NPL.load("./Rpc.lua")
+local RaftMessageType = NPL.load("./RaftMessageType.lua")
+
+local logger = LoggerFactory.getLogger("RaftMessageSender")
+
+local RaftMessageSender = NPL.export()
 
 function RaftMessageSender:new(server)
   local o = {

@@ -6,19 +6,17 @@ Desc:
 
 
 ------------------------------------------------------------
-NPL.load("(gl)npl_mod/Raft/SnapshotSyncRequest.lua");
+NPL.load("./SnapshotSyncRequest.lua");
 local SnapshotSyncRequest = commonlib.gettable("Raft.SnapshotSyncRequest");
 ------------------------------------------------------------
 ]] --
 
 NPL.load("(gl)script/ide/System/Compiler/lib/util.lua")
 local util = commonlib.gettable("System.Compiler.lib.util")
-NPL.load("(gl)npl_mod/Raft/ClusterConfiguration.lua")
-local ClusterConfiguration = commonlib.gettable("Raft.ClusterConfiguration")
-NPL.load("(gl)npl_mod/Raft/Snapshot.lua")
-local Snapshot = commonlib.gettable("Raft.Snapshot")
 
-local SnapshotSyncRequest = commonlib.gettable("Raft.SnapshotSyncRequest")
+local ClusterConfiguration = NPL.load("./ClusterConfiguration.lua")
+local Snapshot = NPL.load("./Snapshot.lua")
+local SnapshotSyncRequest = NPL.export()
 
 function SnapshotSyncRequest:new(snapshot, offset, data, done, currentCollectionName)
   local o = {

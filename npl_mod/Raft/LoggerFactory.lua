@@ -10,8 +10,7 @@ local LoggerFactory = NPL.load("(gl)npl_mod/Raft/LoggerFactory.lua");
 ------------------------------------------------------------
 ]] --
 
-NPL.load("(gl)npl_mod/Raft/Logger.lua")
-local Logger = commonlib.gettable("Raft.Logger")
+local Logger = NPL.load("./Logger")
 
 local LoggerFactory = NPL.export()
 

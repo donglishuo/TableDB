@@ -5,34 +5,31 @@ Date: 2017.04.12
 Desc:
 
 ------------------------------------------------------------
-NPL.load("(gl)npl_mod/TableDB/RaftTableDBStateMachine.lua");
+NPL.load("./RaftTableDBStateMachine.lua");
 local RaftTableDBStateMachine = commonlib.gettable("TableDB.RaftTableDBStateMachine");
 ------------------------------------------------------------
 ]]
 --
-NPL.load("(gl)npl_mod/Raft/ClusterConfiguration.lua")
-local ClusterConfiguration = commonlib.gettable("Raft.ClusterConfiguration")
-NPL.load("(gl)npl_mod/Raft/Snapshot.lua")
-local Snapshot = commonlib.gettable("Raft.Snapshot")
+
 NPL.load("(gl)script/ide/System/Compiler/lib/util.lua")
 local util = commonlib.gettable("System.Compiler.lib.util")
-NPL.load("(gl)npl_mod/Raft/Rpc.lua")
-local Rpc = commonlib.gettable("Raft.Rpc")
-NPL.load("(gl)npl_mod/TableDB/RaftLogEntryValue.lua")
-local RaftLogEntryValue = commonlib.gettable("TableDB.RaftLogEntryValue")
-NPL.load("(gl)npl_mod/TableDB/RaftWALLogEntryValue.lua")
-local RaftWALLogEntryValue = commonlib.gettable("TableDB.RaftWALLogEntryValue")
-
 NPL.load("(gl)script/ide/System/Database/TableDatabase.lua")
 local TableDatabase = commonlib.gettable("System.Database.TableDatabase")
+
+local ClusterConfiguration = NPL.load("../Raft/ClusterConfiguration.lua")
+local Snapshot = NPL.load("../Raft/Snapshot.lua")
+local Rpc = NPL.load("../Raft/Rpc.lua")
+local RaftLogEntryValue = NPL.load("./RaftLogEntryValue.lua")
+local RaftWALLogEntryValue = NPL.load("./RaftWALLogEntryValue.lua")
+
 
 NPL.load("(gl)script/sqlite/libluasqlite3-loader.lua")
 local api, ERR, TYPE, AUTH = load_libluasqlite3()
 
 NPL.load("(gl)script/sqlite/sqlite3.lua")
 
-local LoggerFactory = NPL.load("(gl)npl_mod/Raft/LoggerFactory.lua")
-local RaftTableDBStateMachine = commonlib.gettable("TableDB.RaftTableDBStateMachine")
+local LoggerFactory = NPL.load("../Raft/LoggerFactory.lua")
+local RaftTableDBStateMachine = NPL.export()
 
 -- for function not in class
 local logger = LoggerFactory.getLogger("RaftTableDBStateMachine")

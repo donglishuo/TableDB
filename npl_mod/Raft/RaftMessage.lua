@@ -11,7 +11,7 @@ local RaftMessage = commonlib.gettable("Raft.RaftMessage");
 ------------------------------------------------------------
 ]] --
 
-local RaftMessage = commonlib.gettable("Raft.RaftMessage")
+local RaftMessage = NPL.export()
 
 function RaftMessage:new(subfields)
   local o = {

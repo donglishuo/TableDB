@@ -6,18 +6,18 @@ Desc:
 
 
 ------------------------------------------------------------
-NPL.load("(gl)npl_mod/Raft/RaftConsensus.lua");
+NPL.load("./RaftConsensus.lua");
 local RaftConsensus = commonlib.gettable("Raft.RaftConsensus");
 ------------------------------------------------------------
 ]] --
 
-NPL.load("(gl)npl_mod/Raft/RaftServer.lua")
-local RaftServer = commonlib.gettable("Raft.RaftServer")
-local LoggerFactory = NPL.load("(gl)npl_mod/Raft/LoggerFactory.lua")
+
+local RaftServer = NPL.load("./RaftServer.lua")
+local LoggerFactory = NPL.load("./LoggerFactory.lua")
 
 local logger = LoggerFactory.getLogger("RaftConsensus")
 
-local RaftConsensus = commonlib.gettable("Raft.RaftConsensus")
+local RaftConsensus = NPL.export()
 -- RaftConsensus = {}
 
 function RaftConsensus.run(context)

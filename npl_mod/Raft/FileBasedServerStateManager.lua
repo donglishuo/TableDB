@@ -6,24 +6,20 @@ Desc:
 
 
 ------------------------------------------------------------
-NPL.load("(gl)npl_mod/Raft/FileBasedServerStateManager.lua");
-local FileBasedServerStateManager = commonlib.gettable("Raft.FileBasedServerStateManager");
+
+local FileBasedServerStateManager = NPL.load("./FileBasedServerStateManager");
 ------------------------------------------------------------
 ]] --
 
-NPL.load("(gl)script/ide/Files.lua")
 NPL.load("(gl)script/ide/Json.lua")
-NPL.load("(gl)npl_mod/Raft/ClusterConfiguration.lua")
-NPL.load("(gl)npl_mod/Raft/ServerState.lua")
-NPL.load("(gl)npl_mod/Raft/FileBasedSequentialLogStore.lua")
-local FileBasedSequentialLogStore = commonlib.gettable("Raft.FileBasedSequentialLogStore")
--- NPL.load("(gl)npl_mod/Raft/WALSequentialLogStore.lua");
--- local WALSequentialLogStore = commonlib.gettable("Raft.WALSequentialLogStore");
-local LoggerFactory = NPL.load("(gl)npl_mod/Raft/LoggerFactory.lua")
-local ServerState = commonlib.gettable("Raft.ServerState")
-local ClusterConfiguration = commonlib.gettable("Raft.ClusterConfiguration")
 
-local FileBasedServerStateManager = commonlib.gettable("Raft.FileBasedServerStateManager")
+local FileBasedSequentialLogStore = NPL.load("./FileBasedSequentialLogStore")
+-- local WALSequentialLogStore = NPL.load("./WALSequentialLogStore");
+local LoggerFactory = NPL.load("./LoggerFactory.lua")
+local ServerState = NPL.load("./ServerState")
+local ClusterConfiguration = NPL.load("./ClusterConfiguration")
+
+local FileBasedServerStateManager = NPL.export();
 
 local SequentialLogStore = FileBasedSequentialLogStore
 local STATE_FILE = "server.state"

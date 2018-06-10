@@ -11,7 +11,7 @@ local RaftContext = commonlib.gettable("Raft.RaftContext");
 ------------------------------------------------------------
 ]] --
 
-local RaftContext = commonlib.gettable("Raft.RaftContext")
+local RaftContext = NPL.export()
 
 function RaftContext:new(stateManager, stateMachine, raftParameters, rpcListener, loggerFactory)
   local o = {

@@ -5,17 +5,17 @@ Date: 2017.03.25
 Desc: 
     the LogBuffer is startIndex based
 ------------------------------------------------------------
-NPL.load("(gl)npl_mod/Raft/LogBuffer.lua");
-local LogBuffer = commonlib.gettable("Raft.LogBuffer");
+
+local LogBuffer = NPL.load("./LogBuffer");
 ------------------------------------------------------------
 ]] --
 
-local LoggerFactory = NPL.load("(gl)npl_mod/Raft/LoggerFactory.lua")
+local LoggerFactory = NPL.load("./LoggerFactory.lua")
 NPL.load("(gl)script/ide/System/Compiler/lib/util.lua")
 local util = commonlib.gettable("System.Compiler.lib.util")
-NPL.load("(gl)npl_mod/Raft/Rutils.lua")
-local Rutils = commonlib.gettable("Raft.Rutils")
-local LogBuffer = commonlib.gettable("Raft.LogBuffer")
+
+local Rutils = NPL.load("./Rutils.lua")
+local LogBuffer = NPL.export()
 
 function LogBuffer:new(startIndex, maxSize)
   local o = {

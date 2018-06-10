@@ -7,28 +7,18 @@ Desc:
 
 NPL.load("(gl)script/ide/commonlib.lua")
 NPL.load("(gl)script/ide/System/Compiler/lib/util.lua")
-NPL.load("(gl)npl_mod/Raft/ServerState.lua")
-NPL.load("(gl)npl_mod/Raft/RaftParameters.lua")
-NPL.load("(gl)npl_mod/Raft/RaftContext.lua")
-NPL.load("(gl)npl_mod/Raft/RpcListener.lua")
-NPL.load("(gl)npl_mod/TableDBApp/MessagePrinter.lua")
-NPL.load("(gl)npl_mod/Raft/RaftClient.lua")
-NPL.load("(gl)script/ide/socket/url.lua")
-NPL.load("(gl)npl_mod/Raft/RaftConsensus.lua")
-NPL.load("(gl)npl_mod/Raft/ClusterServer.lua")
-NPL.load("(gl)npl_mod/TableDB/RaftTableDBStateMachine.lua")
-
-local RaftTableDBStateMachine = commonlib.gettable("TableDB.RaftTableDBStateMachine")
-local ClusterServer = commonlib.gettable("Raft.ClusterServer")
-local RaftClient = commonlib.gettable("Raft.RaftClient")
-local RaftParameters = commonlib.gettable("Raft.RaftParameters")
-local RaftContext = commonlib.gettable("Raft.RaftContext")
-local RpcListener = commonlib.gettable("Raft.RpcListener")
-local url = commonlib.gettable("commonlib.socket.url")
-local RaftConsensus = commonlib.gettable("Raft.RaftConsensus")
-local MessagePrinter = commonlib.gettable("TableDBApp.MessagePrinter")
 local util = commonlib.gettable("System.Compiler.lib.util")
-local LoggerFactory = NPL.load("(gl)npl_mod/Raft/LoggerFactory.lua")
+NPL.load("(gl)script/ide/socket/url.lua")
+local url = commonlib.gettable("commonlib.socket.url")
+
+local RaftTableDBStateMachine = NPL.load("../TableDB/RaftTableDBStateMachine.lua")
+local ClusterServer = NPL.load("../Raft/ClusterServer.lua")
+local RaftClient = NPL.load("../Raft/RaftClient.lua")
+local RaftParameters = NPL.load("../Raft/RaftParameters.lua")
+local RaftContext = NPL.load("../Raft/RaftContext.lua")
+local RpcListener = NPL.load("../Raft/RpcListener.lua")
+local RaftConsensus = NPL.load("../Raft/RaftConsensus.lua")
+local LoggerFactory = NPL.load("../Raft/LoggerFactory.lua")
 
 local logger = LoggerFactory.getLogger("App")
 
@@ -51,12 +41,10 @@ NPL.CreateRuntimeState(raftThreadName, 0):Start()
 local useFileStateManager = true
 local ServerStateManager
 if useFileStateManager then
-  NPL.load("(gl)npl_mod/Raft/FileBasedServerStateManager.lua")
-  local FileBasedServerStateManager = commonlib.gettable("Raft.FileBasedServerStateManager")
+  local FileBasedServerStateManager = NPL.load("../Raft/FileBasedServerStateManager.lua")
   ServerStateManager = FileBasedServerStateManager
 else
-  NPL.load("(gl)npl_mod/Raft/SqliteBasedServerStateManager.lua")
-  local SqliteBasedServerStateManager = commonlib.gettable("Raft.SqliteBasedServerStateManager")
+  local SqliteBasedServerStateManager = NPL.load("../Raft/SqliteBasedServerStateManager.lua")
   ServerStateManager = SqliteBasedServerStateManager
 end
 
@@ -106,8 +94,7 @@ local function executeInServerMode(stateMachine)
 end
 
 local function executeAsClient(stateMachine)
-  NPL.load("(gl)npl_mod/TableDB/RaftSqliteStore.lua")
-  local RaftSqliteStore = commonlib.gettable("TableDB.RaftSqliteStore")
+  local RaftSqliteStore = NPL.load("../TableDB/RaftSqliteStore.lua")
   if clientMode == "appendEntries" then
     -- TestInsertThroughputNoIndex()
     -- TestPerformance()
@@ -124,10 +111,10 @@ local function executeAsClient(stateMachine)
     -- TestCompoundIndex()
     -- TestCountAPI()
     -- TestDelete()
-    NPL.load("(gl)npl_mod/TableDB/RaftSqliteWALStore.lua")
-    local RaftSqliteWALStore = commonlib.gettable("TableDB.RaftSqliteWALStore")
-    stateMachine:start2(RaftSqliteWALStore)
-    NPL.load("(gl)npl_mod/TableDB/test/test_TableDatabase.lua")
+    -- NPL.load("../TableDB/RaftSqliteWALStore.lua")
+    -- local RaftSqliteWALStore = commonlib.gettable("TableDB.RaftSqliteWALStore")
+    -- stateMachine:start2(RaftSqliteWALStore)
+    NPL.load("../TableDB/test/test_TableDatabase.lua")
     TestSQLOperations()
   else
     local param = {
@@ -179,6 +166,7 @@ local function executeAsClient(stateMachine)
 end
 
 local vfileID = format("(%s)npl_mod/TableDBApp/App.lua", raftThreadName)
+print(vfileID)
 NPL.activate(vfileID, {start = true})
 
 local started = false
@@ -189,7 +177,6 @@ local function activate()
     logger.info("start stateMachine")
     local rtdb = RaftTableDBStateMachine:new(baseDir, raftThreadName)
     if raftMode:lower() == "server" then
-      -- executeInServerMode(mp)
       executeInServerMode(rtdb)
     elseif raftMode:lower() == "client" then
       executeAsClient(rtdb)

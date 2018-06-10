@@ -5,9 +5,9 @@ Date: 2017.03.25
 Desc: 
 ]] --
 
-NPL.load("(gl)script/ide/commonlib.lua")
+NPL.load("script/ide/commonlib.lua")
 
-local LoggerFactory = NPL.load("(gl)npl_mod/Raft/LoggerFactory.lua")
+local LoggerFactory = NPL.load("../Raft/LoggerFactory.lua")
 
 local logger = LoggerFactory.getLogger("TableDBClient")
 local clientMode = ParaEngine.GetAppCommandLineByParam("clientMode", "appendEntries")
@@ -30,12 +30,12 @@ local function executeAsClient()
     -- TestCountAPI()
     -- TestDelete()
     
-    NPL.load("(gl)npl_mod/TableDB/test/test_TableDatabase.lua")
+    NPL.load("../TableDB/test/test_TableDatabase.lua")
     -- TestInsertThroughputNoIndex()
     TestSQLOperations()
   else
-    NPL.load("(gl)npl_mod/TableDB/RaftSqliteStore.lua")
-    local RaftSqliteStore = commonlib.gettable("TableDB.RaftSqliteStore")
+    
+    local RaftSqliteStore = NPL.load("../TableDB/RaftSqliteStore.lua")
     local param = {
       baseDir = "./",
       host = "localhost",
@@ -62,8 +62,8 @@ local function executeAsClient()
         endpoint = "tcp://localhost:900" .. serverId
       }
 
-      NPL.load("(gl)npl_mod/Raft/ClusterServer.lua")
-      local ClusterServer = commonlib.gettable("Raft.ClusterServer")
+      
+      local ClusterServer = NPL.load("../Raft/ClusterServer.lua")
 
       raftClient:addServer(
         ClusterServer:new(serverToJoin),

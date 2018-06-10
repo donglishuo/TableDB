@@ -14,7 +14,7 @@ local Rutils = commonlib.gettable("Raft.Rutils");
 NPL.load("(gl)script/ide/socket/url.lua")
 local url = commonlib.gettable("commonlib.socket.url")
 
-local Rutils = commonlib.gettable("Raft.Rutils")
+local Rutils = NPL.export()
 
 --- total number of elements in this table.
 -- Note that this is distinct from `#t`, which is the number
@@ -35,6 +35,7 @@ end
 
 function Rutils.addServerToNPLRuntime(server)
   local parsed_url = url.parse(server.endpoint)
+  print(format("add server%d -> %s:%d", server.id, parsed_url.host, parsed_url.port))
   NPL.AddNPLRuntimeAddress({host = parsed_url.host, port = parsed_url.port, nid = "server" .. server.id})
 end
 

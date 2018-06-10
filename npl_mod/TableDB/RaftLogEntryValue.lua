@@ -11,10 +11,8 @@ local RaftLogEntryValue = commonlib.gettable("TableDB.RaftLogEntryValue");
 ------------------------------------------------------------
 ]]
 --
-NPL.load("(gl)script/ide/commonlib.lua")
-local RaftLogEntryValue = commonlib.gettable("TableDB.RaftLogEntryValue")
-NPL.load("(gl)npl_mod/TableDB/VectorPool.lua")
-local VectorPool = commonlib.gettable("TableDB.VectorPool")
+local VectorPool = NPL.load("./VectorPool")
+local RaftLogEntryValue = NPL.export()
 
 local memoryFile
 -- set this to true, if one wants to use binary format (currently slower than text format)

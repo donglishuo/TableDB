@@ -6,25 +6,21 @@ Desc:
 
 
 ------------------------------------------------------------
-NPL.load("(gl)npl_mod/Raft/RaftClient.lua");
-local RaftClient = commonlib.gettable("Raft.RaftClient");
+local RaftClient = NPL.load("./RaftClient");
 ------------------------------------------------------------
 ]]
 --
-NPL.load("(gl)npl_mod/Raft/Rpc.lua")
-local Rpc = commonlib.gettable("Raft.Rpc")
-NPL.load("(gl)npl_mod/Raft/Rutils.lua")
-local Rutils = commonlib.gettable("Raft.Rutils")
-NPL.load("(gl)npl_mod/TableDB/RaftLogEntryValue.lua")
-local RaftLogEntryValue = commonlib.gettable("TableDB.RaftLogEntryValue")
-NPL.load("(gl)npl_mod/Raft/LogEntry.lua")
 NPL.load("(gl)script/ide/System/Compiler/lib/util.lua")
-local LogValueType = NPL.load("(gl)npl_mod/Raft/LogValueType.lua")
 local util = commonlib.gettable("System.Compiler.lib.util")
-local LogEntry = commonlib.gettable("Raft.LogEntry")
-local RaftMessageType = NPL.load("(gl)npl_mod/Raft/RaftMessageType.lua")
 
-local RaftClient = commonlib.gettable("Raft.RaftClient")
+local Rpc = NPL.load("./Rpc")
+local Rutils = NPL.load("./Rutils")
+local RaftLogEntryValue = NPL.load("../TableDB/RaftLogEntryValue")
+local LogValueType = NPL.load("./LogValueType.lua")
+local LogEntry = NPL.load("./LogEntry")
+local RaftMessageType = NPL.load("./RaftMessageType.lua")
+
+local RaftClient = NPL.export();
 
 function RaftClient:new(localAddress, RequestRPC, configuration, loggerFactory)
   local o = {
@@ -85,6 +81,7 @@ function RaftClient:appendEntries(values, callbackFunc)
   }
 
   self.logger.trace("send %d logEntries", #request.logEntries)
+  self.logger.trace("send:%s", util.table_tostring(request.logEntries))
   self:tryCurrentLeader(request, callbackFunc, 0, 0)
 end
 

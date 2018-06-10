@@ -15,12 +15,9 @@ vecPool:CleanPool();
 -------------------------------------------------------
 ]]
 NPL.load("(gl)script/ide/STL.lua")
-local LoggerFactory = NPL.load("(gl)npl_mod/Raft/LoggerFactory.lua")
-
-NPL.load("(gl)npl_mod/TableDB/RaftLogEntryValue.lua")
-local RaftLogEntryValue = commonlib.gettable("TableDB.RaftLogEntryValue")
-
-local VectorPool = commonlib.gettable("TableDB.VectorPool")
+local LoggerFactory = NPL.load("../Raft/LoggerFactory.lua")
+local RaftLogEntryValue = NPL.load("./RaftLogEntryValue.lua")
+local VectorPool = NPL.export()
 VectorPool.__index = VectorPool
 
 -- Maximum number of times the pool can be "cleaned" before the pool is shrunk

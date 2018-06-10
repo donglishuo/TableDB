@@ -28,9 +28,8 @@
 -- So make sure to seed only once, application wide. And to not have multiple processes do that
 -- simultaneously (like nginx does for example).
 
-NPL.load("(gl)script/ide/commonlib.lua")
 
-local M = commonlib.gettable("Raft.uuid")
+local M = NPL.export()
 local math = require('math')
 local os = require('os')
 local string = require('string')

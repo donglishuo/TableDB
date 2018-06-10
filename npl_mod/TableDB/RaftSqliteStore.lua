@@ -6,27 +6,22 @@ Desc:
   used in the client side
   
 ------------------------------------------------------------
-NPL.load("(gl)npl_mod/TableDB/RaftSqliteStore.lua");
+NPL.load("./RaftSqliteStore.lua");
 local RaftSqliteStore = commonlib.gettable("TableDB.RaftSqliteStore");
 ------------------------------------------------------------
 ]]
 NPL.load("(gl)script/ide/System/Compiler/lib/util.lua")
 local util = commonlib.gettable("System.Compiler.lib.util")
-NPL.load("(gl)npl_mod/TableDB/RaftLogEntryValue.lua")
-local RaftLogEntryValue = commonlib.gettable("TableDB.RaftLogEntryValue")
 NPL.load("(gl)script/ide/Json.lua")
-NPL.load("(gl)npl_mod/Raft/ClusterConfiguration.lua")
-local ClusterConfiguration = commonlib.gettable("Raft.ClusterConfiguration")
 
-NPL.load("(gl)npl_mod/TableDB/RaftTableDBStateMachine.lua")
-local RaftTableDBStateMachine = commonlib.gettable("TableDB.RaftTableDBStateMachine")
-NPL.load("(gl)npl_mod/Raft/RaftClient.lua")
-local RaftClient = commonlib.gettable("Raft.RaftClient")
-local LoggerFactory = NPL.load("(gl)npl_mod/Raft/LoggerFactory.lua")
+
+local RaftLogEntryValue = NPL.load("./RaftLogEntryValue.lua")
+local ClusterConfiguration = NPL.load("../Raft/ClusterConfiguration.lua")
+local RaftTableDBStateMachine = NPL.load("./RaftTableDBStateMachine.lua")
+local RaftClient = NPL.load("../Raft/RaftClient.lua")
+local LoggerFactory = NPL.load("../Raft/LoggerFactory.lua")
 local logger = LoggerFactory.getLogger("RaftSqliteStore")
-
-NPL.load("(g1)npl_mod/Raft/uuid.lua")
-local uuid = commonlib.gettable("Raft.uuid")
+local uuid = NPL.load("../Raft/uuid.lua")
 uuid.seed()
 
 
@@ -49,8 +44,8 @@ local function loadClusterConfiguration(confDir)
   end
 end
 
-NPL.load("(gl)npl_mod/Raft/Rpc.lua")
-local Rpc = commonlib.gettable("Raft.Rpc")
+
+local Rpc = NPL.load("../Raft/Rpc.lua")
 function RaftSqliteStore:setupRPC(remoteThreadName)
   -- for init connect
   Rpc:new():init("RaftRequestRPCInit")

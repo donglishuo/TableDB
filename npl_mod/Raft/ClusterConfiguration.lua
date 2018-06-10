@@ -7,17 +7,17 @@ Desc:
 Cluster server configuration 
 a class to hold the configuration information for a server in a cluster
 ------------------------------------------------------------
-NPL.load("(gl)npl_mod/Raft/ClusterConfiguration.lua");
-local ClusterConfiguration = commonlib.gettable("Raft.ClusterConfiguration");
+
+local ClusterConfiguration = NPL.load("./ClusterConfiguration");
 ------------------------------------------------------------
 ]] --
 
-NPL.load("(gl)script/ide/commonlib.lua")
+
 NPL.load("(gl)script/ide/System/Compiler/lib/util.lua")
 local util = commonlib.gettable("System.Compiler.lib.util")
-NPL.load("(gl)npl_mod/Raft/ClusterServer.lua")
-local ClusterServer = commonlib.gettable("Raft.ClusterServer")
-local ClusterConfiguration = commonlib.gettable("Raft.ClusterConfiguration")
+
+local ClusterServer = NPL.load("./ClusterServer.lua");
+local ClusterConfiguration = NPL.export();
 
 function ClusterConfiguration:new(config)
   local o = {

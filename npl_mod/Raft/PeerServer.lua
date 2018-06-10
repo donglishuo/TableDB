@@ -17,8 +17,8 @@ local PeerServer = commonlib.gettable("Raft.PeerServer");
 NPL.load("(gl)script/ide/System/Compiler/lib/util.lua")
 local util = commonlib.gettable("System.Compiler.lib.util")
 
-local RaftMessageType = NPL.load("(gl)npl_mod/Raft/RaftMessageType.lua")
-local PeerServer = commonlib.gettable("Raft.PeerServer")
+local RaftMessageType = NPL.load("./RaftMessageType.lua")
+local PeerServer = NPL.export()
 
 function PeerServer:new(server, ctx, heartbeatTimeoutHandler)
   local o = {

@@ -7,7 +7,7 @@ Internally it will use an existing or a virtual NPL activation file that can be 
 One particular Rpc instance is dedicated to one NPL thread. No need to worry about concurrency problem.
 use the lib:
 ------------------------------------------------------------
-NPL.load("(gl)npl_mod/Raft/Rpc.lua")
+NPL.load("./Rpc.lua")
 local Rpc = commonlib.gettable("Raft.Rpc")
 Rpc:new():init(
   "Test.testRPC",
@@ -35,12 +35,13 @@ Test.testRPC(
 ------------------------------------------------------------
 ]]
 NPL.load("(gl)script/ide/System/Compiler/lib/util.lua")
-local RaftMessageType = NPL.load("(gl)npl_mod/Raft/RaftMessageType.lua")
 local util = commonlib.gettable("System.Compiler.lib.util")
-local LoggerFactory = NPL.load("(gl)npl_mod/Raft/LoggerFactory.lua")
+
+local RaftMessageType = NPL.load("./RaftMessageType.lua")
+local LoggerFactory = NPL.load("./LoggerFactory.lua")
 
 local logger = LoggerFactory.getLogger("Rpc")
-local Rpc = commonlib.gettable("Raft.Rpc")
+local Rpc = NPL.export()
 
 local rpc_instances = {}
 local callbackQueue = {}

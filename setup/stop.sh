@@ -56,9 +56,9 @@ if [ ! -z "$pids" ]; then
     new_pids=''
     for pid in $pids; do
         if [ $i -eq 0 ]; then
-           /bin/kill $pid
+           /bin/kill -15 $pid
         else
-           /bin/kill $pid >/dev/null 2>&1
+           /bin/kill -15 $pid >/dev/null 2>&1
            /bin/kill -9 $pid >/dev/null 2>&1
         fi
 

@@ -11,7 +11,7 @@ local SnapshotSyncContext = commonlib.gettable("Raft.SnapshotSyncContext");
 ------------------------------------------------------------
 ]] --
 
-local SnapshotSyncContext = commonlib.gettable("Raft.SnapshotSyncContext")
+local SnapshotSyncContext = NPL.export()
 
 function SnapshotSyncContext:new(snapshot, currentCollectionIndex)
   local o = {

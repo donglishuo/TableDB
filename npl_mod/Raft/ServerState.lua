@@ -11,9 +11,7 @@ local ServerState = commonlib.gettable("Raft.ServerState");
 ------------------------------------------------------------
 ]] --
 
-NPL.load("(gl)script/ide/commonlib.lua")
-
-local ServerState = commonlib.gettable("Raft.ServerState")
+local ServerState = NPL.export()
 
 function ServerState:new(t, c, v, l)
   local o = {

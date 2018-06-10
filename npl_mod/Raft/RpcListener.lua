@@ -6,22 +6,22 @@ Desc:
 
 
 ------------------------------------------------------------
-NPL.load("(gl)npl_mod/Raft/RpcListener.lua");
+NPL.load("./RpcListener.lua");
 local RpcListener = commonlib.gettable("Raft.RpcListener");
 ------------------------------------------------------------
 ]] --
 
-NPL.load("(gl)npl_mod/Raft/Rpc.lua")
-local Rpc = commonlib.gettable("Raft.Rpc")
+
+local Rpc = NPL.load("./Rpc.lua")
 NPL.load("(gl)script/ide/socket/url.lua")
 local url = commonlib.gettable("commonlib.socket.url")
 NPL.load("(gl)script/ide/System/Compiler/lib/util.lua")
 local util = commonlib.gettable("System.Compiler.lib.util")
-local LoggerFactory = NPL.load("(gl)npl_mod/Raft/LoggerFactory.lua")
-NPL.load("(gl)npl_mod/Raft/Rutils.lua")
-local Rutils = commonlib.gettable("Raft.Rutils")
 
-local RpcListener = commonlib.gettable("Raft.RpcListener")
+local LoggerFactory = NPL.load("./LoggerFactory.lua")
+local Rutils = NPL.load("./Rutils.lua")
+
+local RpcListener = NPL.export()
 
 function RpcListener:new(ip, port, serverId, servers, threadName)
   local o = {

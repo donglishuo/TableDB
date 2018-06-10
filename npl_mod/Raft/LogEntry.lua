@@ -6,13 +6,13 @@ Desc:
 
 
 ------------------------------------------------------------
-NPL.load("(gl)npl_mod/Raft/LogEntry.lua");
-local LogEntry = commonlib.gettable("Raft.LogEntry");
+
+local LogEntry = NPL.load("./LogEntry");
 ------------------------------------------------------------
 ]] --
 
-local LogValueType = NPL.load("(gl)npl_mod/Raft/LogValueType.lua")
-local LogEntry = commonlib.gettable("Raft.LogEntry")
+local LogValueType = NPL.load("./LogValueType.lua");
+local LogEntry = NPL.export();
 
 function LogEntry:new(term, value, valueType)
   local o = {
